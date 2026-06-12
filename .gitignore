@@ -1,0 +1,45 @@
+# ---- .NET ----
+bin/
+obj/
+*.user
+*.suo
+
+# Local environment config (copy from appsettings.Development.example.json)
+appsettings.Development.json
+
+# EF Core / tooling
+*.dbmdl
+*.jfm
+
+# Test & coverage results
+TestResults/
+coverage/
+*.coverage
+*.trx
+
+# ---- IDEs ----
+.vs/
+.vscode/
+.idea/
+*.swp
+
+# ---- Web (React, future pos-web/) ----
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+npm-debug.log*
+
+# ---- Mobile (Flutter, future pos_mobile/) ----
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+*.iml
+.gradle/
+local.properties
+
+# ---- OS ----
+Thumbs.db
+.DS_Store
