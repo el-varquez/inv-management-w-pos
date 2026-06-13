@@ -1,9 +1,8 @@
-using System.Transactions;
 using POS.Domain.Common;
 
 namespace POS.Domain.Entities;
 
-public class TransactionITem : BaseEntity
+public class TransactionItem : BaseEntity
 {
     public Guid TransactionId { get; set; }
     public Transaction Transaction { get; set; } = null!;

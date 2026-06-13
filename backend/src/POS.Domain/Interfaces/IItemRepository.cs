@@ -2,7 +2,7 @@ using POS.Domain.Entities;
 
 namespace POS.Domain.Interfaces;
 
-public interface IITemRepository
+public interface IItemRepository
 {
     Task<Item?> GetByIdAsync(Guid id, CancellationToken ct = default);
     Task<List<Item>> GetAllAsync(CancellationToken ct = default);

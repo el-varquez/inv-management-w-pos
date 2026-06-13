@@ -3,7 +3,7 @@ using POS.Domain.Enums;
 
 namespace POS.Domain.Entities;
 
-public class Trnascation : BaseEntity
+public class Transaction : BaseEntity
 {
     public string ReceiptNumber { get; set; } = string.Empty;
     public decimal Subtotal { get; set; }
@@ -16,5 +16,5 @@ public class Trnascation : BaseEntity
     public Guid? RefundedFrom { get; set; }
     public Guid CreatedBy { get; set; }
 
-    public ICollection<TransactionITem> Items { get; set; } = new List<TransactionITem>();
+    public ICollection<TransactionItem> Items { get; set; } = new List<TransactionItem>();
 }

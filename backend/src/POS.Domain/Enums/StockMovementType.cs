@@ -2,7 +2,7 @@ namespace POS.Domain.Enums;
 
 public enum StockMovementType
 {
-    AddStoce,
+    AddStock,
     Sale,
     Adjustment,
     InventoryCount,
