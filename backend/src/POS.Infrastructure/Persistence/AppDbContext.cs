@@ -40,7 +40,7 @@ public class AppDbContext : DbContext
         builder.Entity<Transaction>().Property(t => t.DiscountAmount).HasPrecision(18, 2);
         builder.Entity<Transaction>().Property(t => t.Total).HasPrecision(18, 2);
         builder.Entity<Transaction>().Property(t => t.AmountTendered).HasPrecision(18, 2);
-        builder.Entity<Transaction>().Property(t => t.Change).HasPrecision(18, 20);
+        builder.Entity<Transaction>().Property(t => t.Change).HasPrecision(18, 2);
         builder.Entity<Transaction>().HasIndex(t => t.ReceiptNumber).IsUnique();
 
         builder.Entity<TransactionItem>().Property(ti => ti.UnitPrice).HasPrecision(18, 2);
