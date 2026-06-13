@@ -14,6 +14,9 @@ public class AppDbContext : DbContext
     public DbSet<StockMovement> StockMovements => Set<StockMovement>();
     public DbSet<Transaction> Transactions => Set<Transaction>();
     public DbSet<TransactionItem> TransactionItems => Set<TransactionItem>();
+    public DbSet<CompositeItem> CompositeItems => Set<CompositeItem>();
+    public DbSet<InventoryCount> InventoryCounts => Set<InventoryCount>();
+    public DbSet<InventoryCountLine> InventoryCountLines => Set<InventoryCountLine>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -56,6 +59,34 @@ public class AppDbContext : DbContext
             .HasOne(ti => ti.Item)
             .WithMany(i => i.TransactionItems)
             .HasForeignKey(ti => ti.ItemId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Entity<CompositeItem>()
+            .HasOne(c => c.ParentItem)
+            .WithMany(i => i.Components)
+            .HasForeignKey(c => c.ParentItemId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<CompositeItem>()
+            .HasOne(c => c.ComponentItem)
+            .WithMany(i => i.UsedInItems)
+            .HasForeignKey(c => c.ComponentItemId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Entity<CompositeItem>().Property(c => c.Quantity).HasPrecision(18, 3);
+
+        builder.Entity<InventoryCount>().HasIndex(ic => ic.Reference).IsUnique();
+
+        builder.Entity<InventoryCountLine>()
+            .HasOne(l => l.InventoryCount)
+            .WithMany(ic => ic.Lines)
+            .HasForeignKey(l => l.InventoryCountId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<InventoryCountLine>()
+            .HasOne(l => l.Item)
+            .WithMany()
+            .HasForeignKey(l => l.ItemId)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }
