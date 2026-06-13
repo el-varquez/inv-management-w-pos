@@ -23,7 +23,7 @@ coverage/
 .idea/
 *.swp
 
-# ---- Web (React, future pos-web/) ----
+# ---- Web (React — frontend/) ----
 node_modules/
 dist/
 .env
