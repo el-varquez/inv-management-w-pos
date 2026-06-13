@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using POS.Domain.Common;
 
 namespace POS.Domain.Entities;
@@ -17,5 +18,9 @@ public class Item : BaseEntity
     public Category Category { get; set; } = null!;
 
     public ICollection<StockMovement> StockMovements { get; set; } = new List<StockMovement>();
-    public ICollection<TransactionItem> TransactionItems { get; set; } = new List<TransactionItem>(); 
+    public ICollection<TransactionItem> TransactionItems { get; set; } = new List<TransactionItem>();
+    public ICollection<CompositeItem> Components { get; set; } = new List<CompositeItem>(); 
+    public ICollection<CompositeItem> UsedInItems { get; set; } = new List<CompositeItem>();
+
+    public bool IsComposite { get; set; } = false;
 }
