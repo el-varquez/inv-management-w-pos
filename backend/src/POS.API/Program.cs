@@ -6,6 +6,8 @@ using POS.Application.Common.Interfaces;
 using POS.Infrastructure;
 using POS.Infrastructure.Persistence;
 using POS.API.Middleware;
+using POS.API.Services;
+using System.Text.Json.Serialization;
 
 // Load secrets from .env (DB connection string + JWT key) before the
 // configuration is built, so they are available as environment variables.
@@ -19,6 +21,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Layers
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICurrentUser, CurrentUser>();
 
 // Auth
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -38,7 +42,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddAuthorization();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
