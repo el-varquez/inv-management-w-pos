@@ -5,5 +5,6 @@ public enum AdjustmentReason
     Damage,
     Loss,
     Spoilage,
+    Correction,
     Other
 }
