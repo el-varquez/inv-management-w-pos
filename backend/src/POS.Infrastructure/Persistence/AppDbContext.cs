@@ -1,12 +1,23 @@
 
 using Microsoft.EntityFrameworkCore;
 using POS.Domain.Entities;
+using MediatR;
+using POS.Domain.Common;
 
 namespace POS.Infrastructure.Persistence;
 
 public class AppDbContext : DbContext
 {
+    private readonly IMediator? _mediator;  
+
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+    public AppDbContext(DbContextOptions<AppDbContext> options, IMediator? mediator = null)
+    : base(options)
+    {
+        _mediator = mediator;
+    }
+
 
     public DbSet<User> Users => Set<User>();
     public DbSet<Category> Categories => Set<Category>();
@@ -88,5 +99,30 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(l => l.ItemId)
             .OnDelete(DeleteBehavior.Restrict);
+    }
+
+    public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
+    {
+        var entitiesWithEvents = ChangeTracker.Entries<BaseEntity>()
+            .Select(e => e.Entity)
+            .Where(e => e.DomainEvents.Any())
+            .ToList();
+
+        var result = await base.SaveChangesAsync(ct);
+
+        if (_mediator is not null)
+        {
+            foreach (var entity in entitiesWithEvents)
+            {
+                var events = entity.DomainEvents.ToList();
+                entity.ClearDomainEvents();
+                foreach (var domainEvent in events)
+                    await _mediator.Publish(domainEvent, ct);
+            }
+            // Persist stock changes made by event handlers
+            await base.SaveChangesAsync(ct);
+        }
+
+        return result;
     }
 }
