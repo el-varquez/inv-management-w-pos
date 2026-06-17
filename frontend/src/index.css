@@ -605,6 +605,286 @@ table.ledger {
   }
 }
 
+/* ── Small button / inline helpers ───────────────────────── */
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+.row-actions {
+  display: inline-flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+.text-red {
+  color: var(--red);
+}
+.text-green {
+  color: var(--green);
+}
+.text-muted {
+  color: var(--ink-3);
+}
+.qty-delta {
+  font-weight: 700;
+}
+
+select.input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238b8170' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+.input-inline {
+  width: 90px;
+  padding: 8px 10px;
+  text-align: right;
+  margin-left: auto;
+}
+.field-hint {
+  font-size: 12.5px;
+  margin: -8px 0 14px;
+}
+
+/* ── Inventory sub-navigation ────────────────────────────── */
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 2px;
+}
+.subnav-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  text-decoration: none;
+  padding: 9px 14px;
+  border-radius: 9px 9px 0 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -3px;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+.subnav-link:hover {
+  color: var(--clay-deep);
+  background: var(--clay-soft);
+}
+.subnav-link.is-active {
+  color: var(--clay-deep);
+  border-bottom-color: var(--clay);
+}
+
+/* ── Forms ───────────────────────────────────────────────── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+.segmented {
+  display: inline-flex;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+  gap: 3px;
+}
+.seg {
+  font-family: var(--ui);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 18px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+.seg.is-active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ── Modal ───────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(34, 28, 20, 0.42);
+  backdrop-filter: blur(3px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  animation: fade 0.18s ease both;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.modal-card {
+  width: 100%;
+  max-width: 480px;
+  max-height: calc(100svh - 48px);
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 26px 26px 22px;
+  animation: rise 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.modal-title {
+  font-size: 22px;
+}
+.modal-sub {
+  color: var(--ink-2);
+  font-size: 13.5px;
+  margin-top: 4px;
+}
+.modal-close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 13px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+.modal-close:hover {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+.modal-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  margin: 6px 0 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.modal-summary strong {
+  font-size: 17px;
+  color: var(--ink);
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* ── Filter bar ──────────────────────────────────────────── */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 16px 20px;
+  margin-bottom: 18px;
+}
+.filter-bar .field {
+  margin-bottom: 0;
+}
+.filter-clear {
+  margin-bottom: 2px;
+}
+
+/* ── Stat cards ──────────────────────────────────────────── */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.stat-card {
+  padding: 20px 22px;
+}
+.stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.stat-value {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: 6px;
+  line-height: 1;
+}
+.stat-sub {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  margin-top: 6px;
+}
+
+/* ── Totals row ──────────────────────────────────────────── */
+.ledger tr.total-row td {
+  background: var(--surface-2);
+  font-weight: 700;
+  color: var(--ink);
+  border-top: 2px solid var(--line-strong);
+}
+.ledger tr.total-row:hover td {
+  background: var(--surface-2);
+}
+
+/* ── Stocktake footer ────────────────────────────────────── */
+.count-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 22px;
+  margin-top: 18px;
+}
+.count-notes {
+  flex: 1;
+  min-width: 240px;
+  margin-bottom: 0;
+}
+.count-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+.spinner-dark {
+  border-color: var(--line-strong);
+  border-top-color: var(--clay);
+}
+
 @media (max-width: 720px) {
   .topbar {
     padding: 12px 18px;
@@ -623,5 +903,8 @@ table.ledger {
   }
   .item-sub-cat {
     display: none;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
   }
 }
