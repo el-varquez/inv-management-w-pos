@@ -8,12 +8,10 @@ namespace POS.Infrastructure.Persistence;
 
 public class AppDbContext : DbContext
 {
-    private readonly IMediator? _mediator;  
-
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    private readonly IMediator? _mediator;
 
     public AppDbContext(DbContextOptions<AppDbContext> options, IMediator? mediator = null)
-    : base(options)
+        : base(options)
     {
         _mediator = mediator;
     }
@@ -119,7 +117,6 @@ public class AppDbContext : DbContext
                 foreach (var domainEvent in events)
                     await _mediator.Publish(domainEvent, ct);
             }
-            // Persist stock changes made by event handlers
             await base.SaveChangesAsync(ct);
         }
 
