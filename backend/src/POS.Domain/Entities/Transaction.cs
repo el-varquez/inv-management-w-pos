@@ -13,7 +13,7 @@ public class Transaction : BaseEntity
     public decimal AmountTendered { get; set; }
     public decimal Change { get; set; }
     public bool IsRefunded { get; set; }
-    public Guid? RefundedFrom { get; set; }
+    public Guid? RefundedFromId { get; set; }
     public Guid CreatedBy { get; set; }
 
     public ICollection<TransactionItem> Items { get; set; } = new List<TransactionItem>();
