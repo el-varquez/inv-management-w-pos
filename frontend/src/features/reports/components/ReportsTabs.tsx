@@ -4,6 +4,7 @@ const tabs = [
   { to: '/reports/sales', label: 'Sales' },
   { to: '/reports/expenses', label: 'Expenses' },
   { to: '/reports/profit', label: 'Profit' },
+  { to: '/reports/best-sellers', label: 'Best sellers' },
 ];
 
 export const ReportsTabs = () => (

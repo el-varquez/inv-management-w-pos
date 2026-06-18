@@ -1243,3 +1243,7 @@ select.input {
   border-radius: 0;
   margin-top: 4px;
 }
+.rank-cell {
+  color: var(--ink-3);
+  font-weight: 700;
+}

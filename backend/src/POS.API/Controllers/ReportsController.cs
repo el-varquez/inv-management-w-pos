@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using POS.Application.Reports.Queries.GetBestSellers;
 using POS.Application.Reports.Queries.GetExpenseReport;
 using POS.Application.Reports.Queries.GetProfitReport;
 using POS.Application.Reports.Queries.GetSalesReport;
@@ -35,4 +36,10 @@ public class ReportsController : ControllerBase
         [FromQuery] Guid? categoryId,
         [FromQuery] Guid? itemId)
         => Ok(await _mediator.Send(new GetProfitReportQuery(from, to, categoryId, itemId)));
+
+    [HttpGet("best-sellers")]
+    public async Task<IActionResult> GetBestSellers(
+        [FromQuery] DateTime? from,
+        [FromQuery] DateTime? to)
+        => Ok(await _mediator.Send(new GetBestSellersQuery(from, to)));
 }

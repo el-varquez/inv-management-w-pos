@@ -14,6 +14,7 @@ import { SalesHistoryScreen } from './features/sales/screens/SalesHistoryScreen'
 import { SalesReportScreen } from './features/reports/screens/SalesReportScreen';
 import { ExpenseReportScreen } from './features/reports/screens/ExpenseReportScreen';
 import { ProfitReportScreen } from './features/reports/screens/ProfitReportScreen';
+import { BestSellersScreen } from './features/reports/screens/BestSellersScreen';
 
 export default function App() {
   return (
@@ -56,6 +57,10 @@ export default function App() {
             <Route path="/reports/sales" element={<SalesReportScreen />} />
             <Route path="/reports/expenses" element={<ExpenseReportScreen />} />
             <Route path="/reports/profit" element={<ProfitReportScreen />} />
+            <Route
+              path="/reports/best-sellers"
+              element={<BestSellersScreen />}
+            />
           </Route>
         </Route>
       </Routes>

@@ -257,3 +257,12 @@ export interface ProfitReport {
   from?: string | null;
   to?: string | null;
 }
+
+export interface BestSeller {
+  itemId: string;
+  itemName: string;
+  quantitySold: number;
+  revenue: number;
+  profit: number;
+  marginPercent: number;
+}
