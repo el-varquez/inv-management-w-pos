@@ -215,3 +215,22 @@ export interface SalesReport {
   from?: string | null;
   to?: string | null;
 }
+
+export interface ExpensePurchase {
+  date: string;
+  itemName: string;
+  quantity: number;
+  costPerUnit: number;
+  totalCost: number;
+  supplierName?: string;
+}
+
+export interface ExpenseReport {
+  costOfPurchases: number;
+  inventoryLoss: number;
+  totalExpenses: number;
+  breakdown: { category: string; amount: number }[];
+  purchases: ExpensePurchase[];
+  from?: string | null;
+  to?: string | null;
+}

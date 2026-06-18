@@ -1,6 +1,9 @@
 import { NavLink } from 'react-router-dom';
 
-const tabs = [{ to: '/reports/sales', label: 'Sales' }];
+const tabs = [
+  { to: '/reports/sales', label: 'Sales' },
+  { to: '/reports/expenses', label: 'Expenses' },
+];
 
 export const ReportsTabs = () => (
   <div className="subnav">
