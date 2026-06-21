@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Layout } from './components/Layout';
 import { LoginScreen } from './features/auth/screens/LoginScreen';
+import { RegisterScreen } from './features/auth/screens/RegisterScreen';
 import { ItemsScreen } from './features/items/screens/ItemsScreen';
 import { CategoriesScreen } from './features/items/screens/CategoriesScreen';
 import { StockLevelsScreen } from './features/inventory/screens/StockLevelsScreen';
@@ -21,6 +22,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginScreen />} />
+        <Route path="/register" element={<RegisterScreen />} />
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
             <Route path="/" element={<Navigate to="/items" replace />} />

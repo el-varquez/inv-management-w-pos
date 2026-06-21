@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
-export const LoginScreen = () => {
-  const { login, loading, error, token } = useAuth();
+export const RegisterScreen = () => {
+  const { register, loading, error, token } = useAuth();
   const navigate = useNavigate();
+  const [businessName, setBusinessName] = useState('');
+  const [adminName, setAdminName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -14,7 +16,7 @@ export const LoginScreen = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await login(email, password);
+    await register({ businessName, adminName, email, password });
   };
 
   return (
@@ -28,9 +30,9 @@ export const LoginScreen = () => {
           </div>
         </div>
 
-        <h1 className="login-title">Welcome back</h1>
+        <h1 className="login-title">Create your store</h1>
         <p className="login-lead">
-          Sign in to manage your items, stock, and sales.
+          Set up your business account in a few seconds.
         </p>
 
         {error && (
@@ -39,6 +41,32 @@ export const LoginScreen = () => {
             {error}
           </div>
         )}
+
+        <div className="field">
+          <label htmlFor="businessName">Business name</label>
+          <input
+            id="businessName"
+            className="input"
+            type="text"
+            placeholder="Aling Nena Store"
+            value={businessName}
+            onChange={(e) => setBusinessName(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="field">
+          <label htmlFor="adminName">Your name</label>
+          <input
+            id="adminName"
+            className="input"
+            type="text"
+            placeholder="Nena Cruz"
+            value={adminName}
+            onChange={(e) => setAdminName(e.target.value)}
+            required
+          />
+        </div>
 
         <div className="field">
           <label htmlFor="email">Email</label>
@@ -60,8 +88,9 @@ export const LoginScreen = () => {
             id="password"
             className="input"
             type="password"
-            autoComplete="current-password"
-            placeholder="••••••••"
+            autoComplete="new-password"
+            placeholder="At least 8 characters"
+            minLength={8}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -74,11 +103,11 @@ export const LoginScreen = () => {
           disabled={loading}
         >
           {loading ? <span className="spinner" aria-hidden="true" /> : null}
-          {loading ? 'Signing in…' : 'Sign in'}
+          {loading ? 'Creating…' : 'Create account'}
         </button>
 
         <p className="login-lead" style={{ textAlign: 'center', marginTop: '1rem' }}>
-          New here? <Link to="/register">Create an account</Link>
+          Already have an account? <Link to="/login">Sign in</Link>
         </p>
       </form>
     </div>
