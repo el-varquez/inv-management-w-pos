@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using POS.Application.Auth.Commands.Login;
+using POS.Application.Auth.Commands.Register;
 
 namespace POS.API.Controller;
 
@@ -13,6 +14,13 @@ public class AuthController : ControllerBase
 
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterCommand command)
     {
         var result = await _mediator.Send(command);
         return Ok(result);
