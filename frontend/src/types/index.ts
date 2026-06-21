@@ -45,6 +45,13 @@ export interface LoginResult {
   role: string;
 }
 
+export interface RegisterPayload {
+  businessName: string;
+  adminName: string;
+  email: string;
+  password: string;
+}
+
 export interface Paged<T> {
   items: T[];
   page: number;
