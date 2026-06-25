@@ -10,6 +10,8 @@ export const Layout = () => {
     navigate('/login', { replace: true });
   };
 
+  const isSuperAdmin = user?.role === 'SuperAdmin';
+
   return (
     <div className="shell">
       <header className="topbar">
@@ -22,38 +24,51 @@ export const Layout = () => {
         </div>
 
         <nav className="nav">
-          <NavLink
-            to="/items"
-            className={({ isActive }) =>
-              isActive ? 'nav-link is-active' : 'nav-link'
-            }
-          >
-            Items
-          </NavLink>
-          <NavLink
-            to="/inventory"
-            className={({ isActive }) =>
-              isActive ? 'nav-link is-active' : 'nav-link'
-            }
-          >
-            Inventory
-          </NavLink>
-          <NavLink
-            to="/sales"
-            className={({ isActive }) =>
-              isActive ? 'nav-link is-active' : 'nav-link'
-            }
-          >
-            Sales
-          </NavLink>
-          <NavLink
-            to="/reports"
-            className={({ isActive }) =>
-              isActive ? 'nav-link is-active' : 'nav-link'
-            }
-          >
-            Reports
-          </NavLink>
+          {isSuperAdmin ? (
+            <NavLink
+              to="/platform"
+              className={({ isActive }) =>
+                isActive ? 'nav-link is-active' : 'nav-link'
+              }
+            >
+              Tenants
+            </NavLink>
+          ) : (
+            <>
+              <NavLink
+                to="/items"
+                className={({ isActive }) =>
+                  isActive ? 'nav-link is-active' : 'nav-link'
+                }
+              >
+                Items
+              </NavLink>
+              <NavLink
+                to="/inventory"
+                className={({ isActive }) =>
+                  isActive ? 'nav-link is-active' : 'nav-link'
+                }
+              >
+                Inventory
+              </NavLink>
+              <NavLink
+                to="/sales"
+                className={({ isActive }) =>
+                  isActive ? 'nav-link is-active' : 'nav-link'
+                }
+              >
+                Sales
+              </NavLink>
+              <NavLink
+                to="/reports"
+                className={({ isActive }) =>
+                  isActive ? 'nav-link is-active' : 'nav-link'
+                }
+              >
+                Reports
+              </NavLink>
+            </>
+          )}
         </nav>
 
         <div className="topbar-right">

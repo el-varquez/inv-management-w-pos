@@ -9,7 +9,7 @@ export const LoginScreen = () => {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    if (token) navigate('/items', { replace: true });
+    if (token) navigate('/', { replace: true });
   }, [token, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
