@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { RoleRoute } from './components/RoleRoute';
 import { Layout } from './components/Layout';
 import { LoginScreen } from './features/auth/screens/LoginScreen';
 import { RegisterScreen } from './features/auth/screens/RegisterScreen';
+import { PlatformScreen } from './features/platform/screens/PlatformScreen';
 import { ItemsScreen } from './features/items/screens/ItemsScreen';
 import { CategoriesScreen } from './features/items/screens/CategoriesScreen';
 import { StockLevelsScreen } from './features/inventory/screens/StockLevelsScreen';
@@ -25,6 +27,19 @@ export default function App() {
         <Route path="/register" element={<RegisterScreen />} />
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
+            <Route
+              element={
+                <RoleRoute allow={(r) => r === 'SuperAdmin'} redirectTo="/items" />
+              }
+            >
+              <Route path="/platform" element={<PlatformScreen />} />
+            </Route>
+
+            <Route
+              element={
+                <RoleRoute allow={(r) => r !== 'SuperAdmin'} redirectTo="/platform" />
+              }
+            >
             <Route path="/" element={<Navigate to="/items" replace />} />
             <Route path="/items" element={<ItemsScreen />} />
             <Route path="/items/categories" element={<CategoriesScreen />} />
@@ -63,6 +78,7 @@ export default function App() {
               path="/reports/best-sellers"
               element={<BestSellersScreen />}
             />
+            </Route>
           </Route>
         </Route>
       </Routes>
